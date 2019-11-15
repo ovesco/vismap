@@ -6,16 +6,17 @@
 
 <script>
 import * as L from 'leaflet';
-import 'leaflet.heat';
+import 'leaflet.heat/dist/leaflet-heat';
 import 'leaflet/dist/leaflet.css';
 
 import { makeGrid } from '../Util';
+import { icon } from '../LeafletUtil';
 
 export default {
   map: null,
   async mounted() {
     this.map = L.map(this.$refs.map).setView([46.5166002, 6.6348448], 15);
-    L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(this.map);
+    // L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(this.map);
     ['zoomend', 'moveend'].forEach((event) => {
       this.map.on(event, e => this.recalculate(e));
     });
@@ -38,8 +39,8 @@ export default {
       // eslint-disable-next-line
       this.heatmapLayer = L.heatLayer(data.map(it => [it.geometry.location.lat, it.geometry.location.lng, it.rating / 5]), {
         minOpacity: 0.5,
-        radius: 50,
-        blur: 40,
+        radius: 20,
+        blur: 30,
       });
 
       this.pins.forEach((pin) => {
@@ -48,7 +49,7 @@ export default {
       // Add pins
       data.forEach((item) => {
         const { lat, lng } = item.geometry.location;
-        const pin = new L.marker([lat, lng]);
+        const pin = new L.marker([lat, lng], { icon: icon(L) });
         pin.addTo(this.map);
         this.pins.push(pin);
       });

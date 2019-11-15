@@ -12,8 +12,12 @@ export default new Vuex.Store({
     zoom: 0,
     cols: 8,
     rows: 6,
+    menuOpen: false,
   },
   mutations: {
+    toggleMenu(state) {
+      state.menuOpen = !state.menuOpen;
+    },
     coords(state, { lat, lng }) {
       state.lat = lat;
       state.lng = lng;
