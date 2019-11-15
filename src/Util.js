@@ -14,21 +14,21 @@ export const distBetweenInMeters = (lat1, lon1, lat2, lon2) => {
   return dist * 1.609344 * 1000;
 };
 
-export const makeGrid = (cols, rows, lat, lng, southWest, northEast) => {
-  // lat vertical, lng horizontal
-  const height = ((southWest.lat) - lat) / (rows / 2);
-  const width = ((northEast.lng) - lng) / (cols / 2);
-  const grid = [];
-  for (let i = 0; i < rows; i += 1) {
-    for (let j = 0; j < cols; j += 1) {
-      grid.push({
-        lng: southWest.lng + (j * width) + (width / 2),
-        lat: northEast.lat + (i * height) + (height / 2),
-        i,
-        j,
-        radius: distBetweenInMeters(lng, lat, lng + (width / 2), lat + (height / 2)),
+export const makeGrid = (_southWest, _northEast) => {
+  const width = distBetweenInMeters(0, _northEast.lng, 0, _southWest.lng);
+  const height = distBetweenInMeters(_northEast.lat, 0, _southWest.lat, 0);
+  const horizontalCircles = Math.ceil(Math.abs(width) / 50000) + 1;
+  const verticalCircles = Math.ceil(Math.abs(height) / 50000) + 1;
+  const lngSpace = Math.abs((_southWest.lng - _northEast.lng) / horizontalCircles);
+  const latSpace = Math.abs((_southWest.lat - _northEast.lat) / verticalCircles);
+  const map = [];
+  for (let i = 0; i < horizontalCircles; i += 1) {
+    for (let j = 0; j < verticalCircles; j += 1) {
+      map.push({
+        lng: _southWest.lng + (i * lngSpace),
+        lat: _southWest.lat + (j * latSpace),
       });
     }
   }
-  return grid;
+  return map;
 };

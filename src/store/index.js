@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { makeGrid } from '../Util';
+import BaseData from '../assets/rawResponse';
 
 Vue.use(Vuex);
 
@@ -14,7 +14,7 @@ export default new Vuex.Store({
     rows: 6,
   },
   mutations: {
-    coords(state, { lat, lng}) {
+    coords(state, { lat, lng }) {
       state.lat = lat;
       state.lng = lng;
     },
@@ -27,9 +27,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async loadData({ commit, state }, { southWest, nortEast }) {
-      const { rows, cols, lng, lat } = state;
-      const grid = makeGrid(cols, rows, lat, lng, southWest, nortEast);
+    async loadData(/* items, grid */) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(BaseData.results);
+        }, 1);
+      });
     },
   },
 });
