@@ -13,10 +13,14 @@ export default new Vuex.Store({
     cols: 8,
     rows: 6,
     menuOpen: false,
+    categories: ['restaurant'],
   },
   mutations: {
     toggleMenu(state) {
       state.menuOpen = !state.menuOpen;
+    },
+    categories(state, category) {
+      state.categories = category;
     },
     coords(state, { lat, lng }) {
       state.lat = lat;

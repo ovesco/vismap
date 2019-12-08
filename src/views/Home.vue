@@ -4,6 +4,7 @@
       <h-menu />
       <div class="map-holder flex-grow-1 position-relative">
         <floatbar />
+        <float-title />
         <h-map class="flex-grow-1" />
       </div>
     </div>
@@ -13,6 +14,7 @@
 <script>
 import Map from '../components/Map.vue';
 import Floatbar from '../components/Floatbar.vue';
+import FloatTitle from '../components/FloatTitle.vue';
 import Menu from '../components/Menu.vue';
 
 export default {
@@ -20,6 +22,7 @@ export default {
     HMap: Map,
     HMenu: Menu,
     Floatbar,
+    FloatTitle,
   },
 };
 </script>
