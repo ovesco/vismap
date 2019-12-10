@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { Input } from 'ant-design-vue';
 
 import './assets/main.scss';
 
@@ -7,6 +8,7 @@ import router from './router';
 import store from './store';
 
 Vue.config.productionTip = false;
+Vue.component('aInput', Input);
 
 new Vue({
   router,

@@ -2,10 +2,10 @@
   <div>
     <div class="float-title p-1 pl-2 pr-2">
       <div class="">
-        <h4 class="text-muted mb-1">I'm looking for</h4>
+        <h4 class="text-muted mb-1">I'm looking for some</h4>
       </div>
       <div>
-        <a-select style="width: 300px" class="mb-1" :defaultValue="$store.state.categories"
+        <a-select style="width: 300px" class="mb-1" :value="$store.state.categories"
                   mode="multiple" @change="v => $store.commit('categories', v)" :loading="true">
           <a-select-option v-for="option in options" :key="option" :value="option">
             {{ option.replace(/_/g, ' ') }}
@@ -23,6 +23,10 @@ export default {
   components: {
     aSelect: Select,
     aSelectOption: Select.Option,
+  },
+  async mounted() {
+    const data = await this.$store.dispatch('loadData');
+    this.options = [...new Set(data.flatMap(it => it.types))];
   },
   data() {
     return {

@@ -10,12 +10,12 @@
           <h4 class="text-muted">{{ data.vicinity }}</h4>
         </div>
       </div>
-      <div class="gauge-holder">
+      <div class="gauge-holder d-flex flex-column align-items-center pt-3 pb-3">
         <div class="chart">
           <vue-svg-gauge :transition-duration="400" :start-angle="-110" :end-angle="110"
                          :inner-radius="80" :separator-thickness="0"
-                         :gauge-color="[{offset: 0, color: '#2020f9'},
-                         {offset: 100, color: '#00ffb2'}]"
+                         :gauge-color="[{offset: 0, color: '#d1d1d1'},
+                         {offset: 100, color: '#2020f9'}]"
                          :value="data.rating" :min="0" :max="5">
             <div class="inner d-flex justify-content-center align-items-end">
               <div class="d-flex flex-column align-items-center">
@@ -25,9 +25,11 @@
             </div>
           </vue-svg-gauge>
         </div>
+        <h3 class="m-0 mt-2">For a total of <b>{{ data.user_ratings_total }}</b> reviews</h3>
       </div>
-      <div>
-        <a-tag v-for="tag in data.types.slice(0, 4)" color="blue" :key="tag">
+      <div class="d-flex justify-content-center flex-wrap">
+        <a-tag v-for="tag in data.types" :color="getColor(tag)" class="mb-2"
+               :key="tag" @click.stop="$store.commit('toggleCategory', tag)">
           {{ tag.replace(/_/g, ' ') }}
         </a-tag>
       </div>
@@ -46,6 +48,11 @@ export default {
     VueSvgGauge,
   },
   props: ['data'],
+  methods: {
+    getColor(tag) {
+      return this.$store.state.categories.includes(tag) ? '#108ee9' : 'blue';
+    },
+  },
 };
 </script>
 

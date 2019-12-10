@@ -781,7 +781,7 @@ export default {
       "id" : "eb45e77b8ef67909aac159e91e693b6159f1ac10",
       "name" : "Hôtel-Restaurant Le Jules Verne - Relais du Silence - The Originals-Human Hôtels & Resorts",
       "opening_hours" : {
-        "open_now" : true
+        "open_now" : false
       },
       "photos" : [
         {

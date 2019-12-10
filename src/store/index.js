@@ -14,13 +14,34 @@ export default new Vuex.Store({
     rows: 6,
     menuOpen: false,
     categories: ['restaurant'],
+    status: 0,
+    minStars: 3,
+    heatmapMaxZoom: 12,
+    pinsMinZoom: 12,
   },
   mutations: {
+    pinsMinZoom(state, zoom) {
+      state.pinsMinZoom = zoom;
+    },
+    heatmapMaxZoom(state, zoom) {
+      state.heatmapMaxZoom = zoom;
+    },
     toggleMenu(state) {
       state.menuOpen = !state.menuOpen;
     },
+    minStars(state, val) {
+      state.minStars = val;
+    },
+    status(state, status) {
+      state.status = status;
+    },
     categories(state, category) {
       state.categories = category;
+    },
+    toggleCategory(state, tag) {
+      const index = state.categories.indexOf(tag);
+      if (index === -1) state.categories.push(tag);
+      else state.categories.splice(index, 1);
     },
     coords(state, { lat, lng }) {
       state.lat = lat;
@@ -35,7 +56,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async loadData(/* items, grid */) {
+    async loadData() {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(BaseData.results);

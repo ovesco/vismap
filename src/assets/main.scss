@@ -5,3 +5,11 @@
 @import "../../node_modules/bootstrap/scss/reboot";
 @import "../../node_modules/bootstrap/scss/grid";
 @import "../../node_modules/bootstrap/scss/utilities";
+
+.not-open {
+  filter: grayscale(1) brightness(1.2);
+}
+
+.slider-transparent .ant-slider-track {
+  background: transparent !important;
+}

@@ -1,9 +1,8 @@
 import Pin from './assets/icon.png';
 
 export const icon = L => L.icon({
-  iconSize: [30, 40],
-  iconAnchor: [15, 38],
-  popupAnchor: [15, -30],
+  iconAnchor: [13, 38],
+  popupAnchor: [-3, -45],
   iconUrl: Pin,
 });
 
