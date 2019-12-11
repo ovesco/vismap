@@ -1,4 +1,4 @@
-# vismap
+# Vismap
 
 ## Project setup
 ```
