@@ -31,6 +31,7 @@ Pour que l'application utilise une API, il suffit d'aller dans le fichier (...) 
 
 ## Visualisation
 Le site affiche une carte de la région avec les points d'intérêts. S'il y a peu de points d'intérêts, ils seront affichés à l'aide d'un marqueur pour plus de précision. Si, au contraire, il y en a beaucoup, l'affichage d'une heatmap est privilégiée afin de mieux visualisé la différence de quantité d'établissement dans les régions.
+
 ![VisMap](img/vismap.png)
 
 ### Interactivité
@@ -43,6 +44,7 @@ Un bouton est intégré pour afficher un menu pour les interactions secondaires 
 - Filtre par niveau d'étoile
 - Affichage par heatmap
 - Affichage par marqueur
+
 ![Filtre](img/filter.png)
 #### Filtres
 
