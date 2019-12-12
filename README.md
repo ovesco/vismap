@@ -1,6 +1,6 @@
 # Vismap
 
-Disponible sur: https://github.com/ovesco/vismap
+Disponible sur: https://vismap.guillaumehochet.now.sh/
 
 ## Idées retouches
 - couleurs de marqueurs
