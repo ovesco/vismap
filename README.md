@@ -11,7 +11,7 @@
 - Afficher les établissements sans informations quand on filtre par établissement ouvert
 
 ## Contexte
-Avec des transports de plus en plus nombreux et de moins en moins chers, le tourisme est en plein expansion. De nombreuses régions basent leur économie sur le tourisme.
+Avec des transports de plus en plus nombreux et de moins en moins chers, le tourisme est en pleine expansion. De nombreuses régions basent leur économie sur le tourisme.
 
 Cependant avec l'explosion d'offres, il est compliqué pour un touriste de savoir où aller et quoi chercher. Certains préfèrent se fier aux comparatifs offerts par des sites comme Trivago, mais d'autres préfèrent se ballader et se fier à leurs envies.
 
