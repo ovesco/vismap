@@ -12,6 +12,7 @@ import 'leaflet/dist/leaflet.css';
 
 import { icon } from '../LeafletUtil';
 import Popup from './Popup.vue';
+import RawData from '../assets/raw.json';
 
 export default {
   map: null,
@@ -27,7 +28,6 @@ export default {
     return {
       pins: [],
       heatmaps: [],
-      data: [],
     };
   },
   computed: {
@@ -90,16 +90,16 @@ export default {
       });
     },
     async reloadData() {
-      console.log('RELOAD');
-      const data = await this.$store.dispatch('loadData');
-      this.data.splice(0, this.data.length);
-      this.data = data;
-      this.recalculate();
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+          this.recalculate();
+        }, Math.random() * 1500 + (Math.random() * 500));
+      });
     },
     recalculate() {
       this.clear();
-      console.log('RECALCULATE');
-      let { data } = this;
+      let data = RawData;
       // eslint-disable-next-line
       data = data.filter(item => this.categories.length === 0 || item.types.filter(type => this.categories.indexOf(type) !== -1).length > 0)
       // filter open closed status
@@ -107,7 +107,7 @@ export default {
           const wanted = this.$store.state.status;
           if (wanted === 0) return true;
           const hasAll = it.opening_hours !== undefined && it.opening_hours.open_now !== undefined;
-          if (!hasAll) return true;
+          if (!hasAll) return false;
           const status = it.opening_hours.open_now;
           return (status === true && wanted === 1) || (status === false && wanted === -1);
         })
@@ -123,7 +123,10 @@ export default {
               .openPopup();
           });
           pin.addTo(this.map);
-          if (item.opening_hours && item.opening_hours.open_now !== true) {
+          if (item.opening_hours === undefined || item.opening_hours.open_now === undefined) {
+            // eslint-disable-next-line
+            pin._icon.classList.add('no-data');
+          } else if (item.opening_hours && item.opening_hours.open_now !== true) {
             // eslint-disable-next-line
             pin._icon.classList.add('not-open');
           }
