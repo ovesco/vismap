@@ -6,14 +6,20 @@
             <p class="m-0">It should be</p>
             <a-radio-group :value="$store.state.status" style="width: 252px"
                            @change="v => $store.commit('status', v.target.value)">
-              <a-radio-button :value="1">Open</a-radio-button>
-              <a-radio-button :value="-1">Closed</a-radio-button>
-              <a-radio-button :value="0"> I don't mind</a-radio-button>
+              <a-radio-button :value="1" :disabled="$store.state.loading"
+                              :loading="$store.state.loading">Open</a-radio-button>
+              <a-radio-button :value="-1"
+                              :disabled="$store.state.loading" :loading="$store.state.loading">
+                Closed</a-radio-button>
+              <a-radio-button :value="0"
+                              :disabled="$store.state.loading" :loading="$store.state.loading">
+                I don't mind</a-radio-button>
             </a-radio-group>
           </section>
           <section class="m-4">
             <p class="m-0">Minimum stars I want</p>
             <a-slider :defaultValue="3" :min="1" :step="0.1" :max="5"
+                      :disabled="$store.state.loading" :loading="$store.state.loading"
                       @change="v => $store.commit('minStars', v)" />
           </section>
           <section class="m-4">
@@ -22,6 +28,7 @@
               <div class="flex-grow-1 slider-transparent">
                 <a-slider :defaultValue="$store.state.heatmapMaxZoom" :min="1" :step="1" :max="18"
                           :tooltipVisible="false"
+                          :disabled="$store.state.loading" :loading="$store.state.loading"
                           @change="v => $store.commit('heatmapMaxZoom', v)" />
               </div>
               <div class="tag">{{ $store.state.heatmapMaxZoom }}</div>
@@ -33,6 +40,7 @@
               <div class="flex-grow-1 slider-transparent">
                 <a-slider :defaultValue="$store.state.heatmapMaxZoom" :min="1" :step="1" :max="18"
                           :tooltipVisible="false"
+                          :disabled="$store.state.loading" :loading="$store.state.loading"
                           @change="v => $store.commit('pinsMinZoom', v)" />
               </div>
               <div class="tag">{{ $store.state.pinsMinZoom }}</div>

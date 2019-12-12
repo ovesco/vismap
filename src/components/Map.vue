@@ -10,7 +10,6 @@ import Vue from 'vue';
 import 'leaflet.heat/dist/leaflet-heat';
 import 'leaflet/dist/leaflet.css';
 
-import { makeGrid } from '../Util';
 import { icon } from '../LeafletUtil';
 import Popup from './Popup.vue';
 
@@ -19,15 +18,16 @@ export default {
   async mounted() {
     this.map = L.map(this.$refs.map).setView([46.5166002, 6.6348448], 15);
     L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(this.map);
-    ['moveend'].forEach((event) => {
-      this.map.on(event, e => this.recalculate(e));
+    ['moveend', 'zoomend'].forEach((event) => {
+      this.map.on(event, () => this.reloadData());
     });
-    await this.recalculate();
+    await this.reloadData();
   },
   data() {
     return {
-      heatmapLayer: null,
       pins: [],
+      heatmaps: [],
+      data: [],
     };
   },
   computed: {
@@ -79,19 +79,30 @@ export default {
       instance.$mount();
       return instance.$el;
     },
-    async recalculate() {
-      if (this.heatmapLayer !== null) {
-        this.map.removeLayer(this.heatmapLayer);
-        this.heatmapLayer = null;
-      }
-      const { _southWest, _northEast } = this.map.getBounds();
-      const grid = makeGrid(_southWest, _northEast);
-      let data = await this.$store.dispatch('loadData', grid);
-      // Filter categories
-      console.log(this.categories);
+    clear() {
+      console.log('CLEAR');
+      this.heatmaps.forEach((it) => {
+        this.map.removeLayer(it);
+      });
+      this.heatmaps.splice(0, this.heatmaps.length);
+      this.pins.forEach((pin) => {
+        this.map.removeLayer(pin);
+      });
+    },
+    async reloadData() {
+      console.log('RELOAD');
+      const data = await this.$store.dispatch('loadData');
+      this.data.splice(0, this.data.length);
+      this.data = data;
+      this.recalculate();
+    },
+    recalculate() {
+      this.clear();
+      console.log('RECALCULATE');
+      let { data } = this;
       // eslint-disable-next-line
       data = data.filter(item => this.categories.length === 0 || item.types.filter(type => this.categories.indexOf(type) !== -1).length > 0)
-        // filter open closed status
+      // filter open closed status
         .filter((it) => {
           const wanted = this.$store.state.status;
           if (wanted === 0) return true;
@@ -102,10 +113,6 @@ export default {
         })
         // filter stars
         .filter(it => it.rating >= this.$store.state.minStars);
-
-      this.pins.forEach((pin) => {
-        this.map.removeLayer(pin);
-      });
       // Add pins
       if (this.pinsMinZoom <= this.map.getZoom()) {
         data.forEach((item) => {
@@ -125,12 +132,13 @@ export default {
       }
       if (this.heatmapMaxZoom >= this.map.getZoom()) {
         // eslint-disable-next-line
-        this.heatmapLayer = L.heatLayer(data.map(it => [it.geometry.location.lat, it.geometry.location.lng, it.rating / 5]), {
+        const heatlayer = L.heatLayer(data.map(it => [it.geometry.location.lat, it.geometry.location.lng, it.rating / 5]), {
           minOpacity: 0.6,
           radius: 20,
           blur: 30,
         });
-        this.heatmapLayer.addTo(this.map);
+        heatlayer.addTo(this.map);
+        this.heatmaps.push(heatlayer);
       }
     },
   },

@@ -6,7 +6,8 @@
       </div>
       <div>
         <a-select style="width: 300px" class="mb-1" :value="$store.state.categories"
-                  mode="multiple" @change="v => $store.commit('categories', v)" :loading="true">
+                  mode="multiple" @change="v => $store.commit('categories', v)"
+                  :disabled="$store.state.loading" :loading="$store.state.loading">
           <a-select-option v-for="option in options" :key="option" :value="option">
             {{ option.replace(/_/g, ' ') }}
           </a-select-option>

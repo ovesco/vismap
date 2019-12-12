@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import BaseData from '../assets/rawResponse';
+import BaseData from '../assets/raw.json';
 
 Vue.use(Vuex);
 
@@ -12,14 +12,19 @@ export default new Vuex.Store({
     zoom: 0,
     cols: 8,
     rows: 6,
+    data: BaseData,
     menuOpen: false,
     categories: ['restaurant'],
     status: 0,
     minStars: 3,
     heatmapMaxZoom: 12,
     pinsMinZoom: 12,
+    loading: false,
   },
   mutations: {
+    loading(state, lo) {
+      state.loading = lo;
+    },
     pinsMinZoom(state, zoom) {
       state.pinsMinZoom = zoom;
     },
@@ -56,11 +61,13 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async loadData() {
+    async loadData({ state, commit }) {
+      commit('loading', true);
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(BaseData.results);
-        }, 1);
+          commit('loading', false);
+          resolve(state.data);
+        }, Math.random() * 1500 + (Math.random() * 500));
       });
     },
   },
