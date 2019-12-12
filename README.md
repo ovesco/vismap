@@ -1,5 +1,7 @@
 # Vismap
 
+Disponible sur: https://github.com/ovesco/vismap
+
 ## Idées retouches
 - couleurs de marqueurs
   - vert - orange - rouge(ouvert - aucune information - fermé)
@@ -31,8 +33,6 @@ Dans de nombreuses villes touristiques, des quartiers de magasins et de restaura
 L'application peut récupérer les données grâce à l'API Google Maps qui fournit les établissements près d'un point géographique. Ainsi les données sont intégrées et mises à jour par les utilisateurs eux-mêmes.
 
 Cependant, en phase de développement, nous travaillons en local et il n'est donc pas possible de whitelister l'adresse du site web. Hors l'API refuse les requêtes d'adresses non-whitelistées. Ainsi nous avons téléchargé en local un jeu de données.
-
-Pour que l'application utilise une API, il suffit d'aller dans le fichier (...) et de décommenté la ligne :
 
 ## Visualisation
 Le site affiche une carte de la région avec les zones d'intérêts. Chaque établissement peut être désigné soit par un marqueur, soit au travers d'une heatmap en fonction du niveau de zoom.
