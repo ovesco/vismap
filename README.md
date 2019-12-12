@@ -1,19 +1,6 @@
 # Vismap
 
-## Idées retouches
-- couleurs de marqueurs
-  - vert - orange - rouge(ouvert - aucune information - fermé)
-  - Ajouter de la transparence pour les marqueurs fermés
-- Afficher les marqueurs si peu d'établissement plutôt que par niveau de zoom et inversement
-- Jouer sur la couleur aussi sur les couleurs pour le heatmap
-- Corriger bug chargement d'affichage
-- Enlever la visualisation des établissements fermés uniquement
-- Afficher les établissements sans informations quand on filtre par établissement ouvert
-- Trier par level de prix
-- Ajouter titre
-- Signaler d'où proviennent les données
-- Signaler échelle d'intensité pour la heatmap
-- Combiner slider heatmap et marqueur en un seul
+Disponible sur: https://vismap.guillaumehochet.now.sh/
 
 ## Contexte
 Avec des transports de plus en plus nombreux et de moins en moins chers, le tourisme est en pleine expansion. De nombreuses régions basent leur économie sur le tourisme.
@@ -31,8 +18,6 @@ Dans de nombreuses villes touristiques, des quartiers de magasins et de restaura
 L'application peut récupérer les données grâce à l'API Google Maps qui fournit les établissements près d'un point géographique. Ainsi les données sont intégrées et mises à jour par les utilisateurs eux-mêmes.
 
 Cependant, en phase de développement, nous travaillons en local et il n'est donc pas possible de whitelister l'adresse du site web. Hors l'API refuse les requêtes d'adresses non-whitelistées. Ainsi nous avons téléchargé en local un jeu de données.
-
-Pour que l'application utilise une API, il suffit d'aller dans le fichier (...) et de décommenté la ligne :
 
 ## Visualisation
 Le site affiche une carte de la région avec les zones d'intérêts. Chaque établissement peut être désigné soit par un marqueur, soit au travers d'une heatmap en fonction du niveau de zoom.
