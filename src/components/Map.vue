@@ -94,7 +94,7 @@ export default {
         setTimeout(() => {
           resolve();
           this.recalculate();
-          this.$store.commit('loading', false);
+          this.$store.commit('loading', falsecd );
         }, Math.random() * 1500 + (Math.random() * 500));
       });
     },
