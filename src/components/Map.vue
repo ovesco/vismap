@@ -80,7 +80,6 @@ export default {
       return instance.$el;
     },
     clear() {
-      console.log('CLEAR');
       this.heatmaps.forEach((it) => {
         this.map.removeLayer(it);
       });
@@ -90,10 +89,12 @@ export default {
       });
     },
     async reloadData() {
+      this.$store.commit('loading', true);
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve();
           this.recalculate();
+          this.$store.commit('loading', false);
         }, Math.random() * 1500 + (Math.random() * 500));
       });
     },
