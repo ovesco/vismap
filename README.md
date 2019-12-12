@@ -9,6 +9,7 @@
 - Corriger bug chargement d'affichage
 - Enlever la visualisation des établissements fermés uniquement
 - Afficher les établissements sans informations quand on filtre par établissement ouvert
+- Trier par level de prix
 
 ## Contexte
 Avec des transports de plus en plus nombreux et de moins en moins chers, le tourisme est en pleine expansion. De nombreuses régions basent leur économie sur le tourisme.
