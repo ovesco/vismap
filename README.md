@@ -2,21 +2,6 @@
 
 Disponible sur: https://vismap.guillaumehochet.now.sh/
 
-## Idées retouches
-- couleurs de marqueurs
-  - vert - orange - rouge(ouvert - aucune information - fermé)
-  - Ajouter de la transparence pour les marqueurs fermés
-- Afficher les marqueurs si peu d'établissement plutôt que par niveau de zoom et inversement
-- Jouer sur la couleur aussi sur les couleurs pour le heatmap
-- Corriger bug chargement d'affichage
-- Enlever la visualisation des établissements fermés uniquement
-- Afficher les établissements sans informations quand on filtre par établissement ouvert
-- Trier par level de prix
-- Ajouter titre
-- Signaler d'où proviennent les données
-- Signaler échelle d'intensité pour la heatmap
-- Combiner slider heatmap et marqueur en un seul
-
 ## Contexte
 Avec des transports de plus en plus nombreux et de moins en moins chers, le tourisme est en pleine expansion. De nombreuses régions basent leur économie sur le tourisme.
 
